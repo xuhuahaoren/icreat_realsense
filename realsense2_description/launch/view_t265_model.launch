@@ -1,0 +1,17 @@
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find realsense2_description)/urdf/test_t265_camera.urdf.xacro'" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    </include>
+    <node
+        name="spawn_model"
+        pkg="gazebo_ros"
+        type="spawn_model"
+        args="-urdf -param robot_description -model t265_camera"
+    />
+    <!--arg name="gui" default="True" />
+    <param name="use_gui" value="$(arg gui)" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find realsense2_description)/rviz/urdf.rviz" required="true" /-->
+
+</launch>
